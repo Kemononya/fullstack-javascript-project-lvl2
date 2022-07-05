@@ -3,9 +3,11 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const genDiff = (filepath1, filepath2) => {
-  const readedFile1 = readFileSync(path.resolve(filepath1));
+  const normalizedPath1 = path.resolve(filepath1);
+  const readedFile1 = readFileSync(normalizedPath1);
   const oldObject = JSON.parse(readedFile1);
-  const readedFile2 = readFileSync(path.resolve(filepath2));
+  const normalizedPath2 = path.resolve(filepath2);
+  const readedFile2 = readFileSync(normalizedPath2);
   const newObject = JSON.parse(readedFile2);
 
   const partialDiff1 = Object.keys(oldObject).map((key) => {
