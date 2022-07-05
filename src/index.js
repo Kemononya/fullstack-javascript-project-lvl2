@@ -2,11 +2,9 @@ import _ from 'lodash';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-const readingFile = (filepath) => readFileSync(path.resolve(filepath));
-
 const genDiff = (filepath1, filepath2) => {
-  const oldObject = JSON.parse(readingFile(filepath1));
-  const newObject = JSON.parse(readingFile(filepath2));
+  const oldObject = JSON.parse(readFileSync(path.resolve(filepath1)));
+  const newObject = JSON.parse(readFileSync(path.resolve(filepath2)));
 
   const partialDiff1 = Object.keys(oldObject).map((key) => {
     if (!Object.hasOwn(newObject, key)) {
