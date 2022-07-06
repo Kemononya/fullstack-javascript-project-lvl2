@@ -1,4 +1,4 @@
-  name: eslint-test
+  name: jest-test
 
   on: [push]
 
