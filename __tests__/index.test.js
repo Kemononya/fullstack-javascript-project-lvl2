@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'url';
+import { readFileSync } from 'fs';
 import path from 'path';
 import genDiff from '../src/index.js';
 
@@ -13,13 +14,6 @@ beforeAll(() => {
 test('plain data', () => {
   const file1 = getFixturePath('file1.json');
   const file2 = getFixturePath('file2.json');
-  const result = `{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`;
-  expect(genDiff(file1, file2)).toEqual(result);
+  const result1 = readFileSync(getFixturePath('result1.txt')).toString();
+  expect(genDiff(file1, file2)).toEqual(result1);
 });
