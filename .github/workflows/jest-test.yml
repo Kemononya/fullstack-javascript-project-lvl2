@@ -12,4 +12,4 @@
       - name: install dependances
         run: make install
       - name: use jest
-        run: npx jest
+        run: make test
