@@ -13,8 +13,15 @@ beforeAll(() => {
 });
 
 test('plain data', () => {
-  const file1 = getFixturePath('file1.json');
-  const file2 = getFixturePath('file2.json');
+  const file1J = getFixturePath('file1.json');
+  const file2J = getFixturePath('file2.json');
+
+  const file1Y = getFixturePath('file1.yml');
+  const file2Y = getFixturePath('file2.yml');
+
   const result1 = readFileSync(getFixturePath('result1.txt')).toString();
-  expect(genDiff(file1, file2)).toEqual(result1);
+
+  expect(genDiff(file1J, file2J)).toEqual(result1);
+  expect(genDiff(file1Y, file2Y)).toEqual(result1);
+  expect(genDiff(file1J, file2Y)).toEqual(result1);
 });

@@ -5,4 +5,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b41577901c2c777e7ecd/maintainability)](https://codeclimate.com/github/Kemononya/fullstack-javascript-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b41577901c2c777e7ecd/test_coverage)](https://codeclimate.com/github/Kemononya/fullstack-javascript-project-lvl2/test_coverage)
 
-asciinema: [plain-files](https://asciinema.org/a/ds2yj2l89yVwwWUes2wI914Qq)
+asciinema: [plain-files](https://asciinema.org/a/HKuNvRDKYtaGqab13G4Y6my49)

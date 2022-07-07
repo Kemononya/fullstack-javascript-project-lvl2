@@ -1,10 +1,15 @@
 import _ from 'lodash';
 import { readFileSync } from 'fs';
 import path from 'path';
+import parse from './parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
-  const oldObject = JSON.parse(readFileSync(path.resolve(filepath1)));
-  const newObject = JSON.parse(readFileSync(path.resolve(filepath2)));
+  const file1 = readFileSync(path.resolve(filepath1));
+  const file1Ext = path.extname(filepath1);
+  const file2 = readFileSync(path.resolve(filepath2));
+  const file2Ext = path.extname(filepath2);
+  const oldObject = parse(file1, file1Ext);
+  const newObject = parse(file2, file2Ext);
 
   const partialDiff1 = Object.keys(oldObject).map((key) => {
     if (!Object.hasOwn(newObject, key)) {
