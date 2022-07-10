@@ -21,8 +21,10 @@ test('main workflow', () => {
 
   const resultStylish = readFileSync(getFixturePath('result-stylish.txt')).toString();
   const resultPlain = readFileSync(getFixturePath('result-plain.txt')).toString();
+  const resultJSON = readFileSync(getFixturePath('result-json.txt')).toString();
 
   expect(genDiff(file1Y, file2Y)).toEqual(resultStylish);
   expect(genDiff(file1J, file2J, 'stylish')).toEqual(resultStylish);
   expect(genDiff(file1J, file2Y, 'plain')).toEqual(resultPlain);
+  expect(genDiff(file1J, file2Y, 'json')).toEqual(resultJSON);
 });
