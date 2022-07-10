@@ -19,8 +19,10 @@ test('main workflow', () => {
   const file1Y = getFixturePath('file1.yml');
   const file2Y = getFixturePath('file2.yml');
 
-  const result = readFileSync(getFixturePath('result.txt')).toString();
+  const resultStylish = readFileSync(getFixturePath('result-stylish.txt')).toString();
+  const resultPlain = readFileSync(getFixturePath('result-plain.txt')).toString();
 
-  expect(genDiff(file1Y, file2Y)).toEqual(result);
-  expect(genDiff(file1J, file2J)).toEqual(result);
+  expect(genDiff(file1Y, file2Y)).toEqual(resultStylish);
+  expect(genDiff(file1J, file2J, 'stylish')).toEqual(resultStylish);
+  expect(genDiff(file1J, file2Y, 'plain')).toEqual(resultPlain);
 });

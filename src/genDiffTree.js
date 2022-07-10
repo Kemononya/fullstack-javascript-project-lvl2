@@ -1,9 +1,14 @@
 import _ from 'lodash';
 
-const genDiffTree = (oldObject, newObject) => {
+const genKeys = (oldObject, newObject) => {
   const keys = _.union(Object.keys(oldObject), Object.keys(newObject));
   const sortedKeys = _.sortBy(keys, ((key) => key));
-  const diff = sortedKeys.map((key) => {
+  return sortedKeys;
+};
+
+const genDiffTree = (oldObject, newObject) => {
+  const keys = genKeys(oldObject, newObject);
+  const diff = keys.map((key) => {
     let result;
     if (!Object.hasOwn(newObject, key)) {
       result = ['-', key, oldObject[key]];
