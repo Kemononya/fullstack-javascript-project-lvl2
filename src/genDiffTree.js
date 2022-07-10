@@ -1,9 +1,7 @@
 import _ from 'lodash';
 
 const genDiffTree = (oldObject, newObject) => {
-  const oldKeys = Object.keys(oldObject);
-  const newKeys = Object.keys(newObject);
-  const keys = _.union(oldKeys, newKeys);
+  const keys = _.union(Object.keys(oldObject), Object.keys(newObject));
   const sortedKeys = _.sortBy(keys, ((key) => key));
   const diff = sortedKeys.map((key) => {
     let result;
