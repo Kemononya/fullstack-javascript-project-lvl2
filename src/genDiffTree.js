@@ -4,23 +4,21 @@ const genDiffTree = (oldObject, newObject) => {
   const keys = _.union(Object.keys(oldObject), Object.keys(newObject));
   const sortedKeys = _.sortBy(keys, ((key) => key));
   const diff = sortedKeys.map((key) => {
+    let result;
     if (!Object.hasOwn(newObject, key)) {
-      return ['-', key, oldObject[key]];
-    }
-    if (!Object.hasOwn(oldObject, key)) {
-      return ['+', key, newObject[key]];
-    }
-    if ((_.isObject(oldObject[key]) && !_.isObject(newObject[key]))
+      result = ['-', key, oldObject[key]];
+    } else if (!Object.hasOwn(oldObject, key)) {
+      result = ['+', key, newObject[key]];
+    } else if ((_.isObject(oldObject[key]) && !_.isObject(newObject[key]))
     || (!_.isObject(oldObject[key]) && _.isObject(newObject[key]))) {
-      return [['-', key, oldObject[key]], ['+', key, newObject[key]]];
-    }
-    if (_.isObject(oldObject[key]) && _.isObject(newObject[key])) {
-      return [' ', key, genDiffTree(oldObject[key], newObject[key])];
-    }
-    if (oldObject[key] === newObject[key]) {
-      return [' ', key, oldObject[key]];
-    }
-    return [['-', key, oldObject[key]], ['+', key, newObject[key]]];
+      result = [['-', key, oldObject[key]], ['+', key, newObject[key]]];
+    } else if (_.isObject(oldObject[key]) && _.isObject(newObject[key])) {
+      result = [' ', key, genDiffTree(oldObject[key], newObject[key])];
+    } else if (oldObject[key] === newObject[key]) {
+      result = [' ', key, oldObject[key]];
+    } else result = [['-', key, oldObject[key]], ['+', key, newObject[key]]];
+
+    return result;
   });
 
   return diff;

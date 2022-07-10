@@ -12,16 +12,12 @@ const genTreeForObject = (object, depth) => {
     .entries(object)
     .map(([key, val]) => `${currentIndent}${key}: ${genTreeForObject(val, depth + 2)}`);
 
-  return [
-    '{',
-    ...lines,
-    `${bracketIndent}}`,
-  ].join('\n');
+  return ['{', ...lines, `${bracketIndent}}`].join('\n');
 };
 
 const stylish = (unformattedTree) => {
   const iter = (currentValue, depth) => {
-    if (!_.isArray(currentValue) && !_.isObject(currentValue)) {
+    if (!_.isObject(currentValue)) {
       return `${currentValue}`;
     }
 
@@ -41,17 +37,12 @@ const stylish = (unformattedTree) => {
         const line1 = `${currentIndent}${firstSym} ${firstKey}: ${iter(firstValue, depth + 2)}`;
         const line2 = `${currentIndent}${secondSym} ${secondKey}: ${iter(secondValue, depth + 2)}`;
         line = `${line1}\n${line2}`;
-      } else {
-        line = `${currentIndent}${first} ${key}: ${iter(value, depth + 2)}`;
-      }
+      } else line = `${currentIndent}${first} ${key}: ${iter(value, depth + 2)}`;
+
       return line;
     });
 
-    return [
-      '{',
-      ...lines,
-      `${bracketIndent}}`,
-    ].join('\n');
+    return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };
 
   return iter(unformattedTree, 1);
