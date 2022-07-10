@@ -3,19 +3,14 @@ import plain from './plain.js';
 import json from './json.js';
 
 const switchFormatters = (formatName) => {
-  let correctFormatter;
   switch (formatName) {
     case 'plain':
-      correctFormatter = plain;
-      break;
+      return plain;
     case 'json':
-      correctFormatter = json;
-      break;
+      return json;
     default:
-      correctFormatter = stylish;
+      return stylish;
   }
-
-  return correctFormatter;
 };
 
 export default switchFormatters;

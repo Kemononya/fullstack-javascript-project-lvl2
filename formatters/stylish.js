@@ -30,16 +30,14 @@ const stylish = (unformattedTree) => {
     }
 
     const lines = currentValue.map(([first, key, value]) => {
-      let line;
       if (_.isArray(first)) {
         const [firstSym, firstKey, firstValue] = first;
         const [secondSym, secondKey, secondValue] = key;
         const line1 = `${currentIndent}${firstSym} ${firstKey}: ${iter(firstValue, depth + 2)}`;
         const line2 = `${currentIndent}${secondSym} ${secondKey}: ${iter(secondValue, depth + 2)}`;
-        line = `${line1}\n${line2}`;
-      } else line = `${currentIndent}${first} ${key}: ${iter(value, depth + 2)}`;
-
-      return line;
+        return `${line1}\n${line2}`;
+      }
+      return `${currentIndent}${first} ${key}: ${iter(value, depth + 2)}`;
     });
 
     return ['{', ...lines, `${bracketIndent}}`].join('\n');

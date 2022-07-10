@@ -27,23 +27,20 @@ const arrayConverter = (firstArr, secondArr, property) => {
 const plain = (unformattedTree) => {
   const iter = (currentValue, property = '') => {
     const lines = currentValue.flatMap(([first, key, value]) => {
-      let prop = (property === '') ? '' : `${property}.`;
+      const prop = (property === '') ? '' : `${property}.`;
       if (_.isArray(first)) {
         return arrayConverter(first, key, prop);
       }
 
-      prop = `${prop}${key}`;
       const val = switchValue(value);
-      let line;
       if (first === '+') {
-        line = added(prop, val);
-      } else if (first === '-') {
-        line = removed(prop);
-      } else if (!_.isObject(value)) {
-        line = '';
-      } else line = iter(value, prop);
-
-      return line;
+        return added(`${prop}${key}`, val);
+      } if (first === '-') {
+        return removed(`${prop}${key}`);
+      } if (!_.isObject(value)) {
+        return '';
+      }
+      return iter(value, `${prop}${key}`);
     });
 
     return lines;
