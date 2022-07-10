@@ -19,7 +19,7 @@ const genTreeForObject = (object, depth) => {
   ].join('\n');
 };
 
-const formatter = (unformattedTree) => {
+const stylish = (unformattedTree) => {
   const iter = (currentValue, depth) => {
     if (!_.isArray(currentValue) && !_.isObject(currentValue)) {
       return `${currentValue}`;
@@ -57,4 +57,4 @@ const formatter = (unformattedTree) => {
   return iter(unformattedTree, 1);
 };
 
-export default formatter;
+export default stylish;
